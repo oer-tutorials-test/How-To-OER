@@ -1,0 +1,20 @@
+creativeWorkStatus: Published
+id: >-
+  https://liascript.github.io/course/?https://raw.githubusercontent.com/oer-tutorials-test/How-To-OER/main/course.md#1
+name: How To OER
+description: How to create OER in GitHub
+license:
+  id: https://creativecommons.org/publicdomain/zero/1.0/deed.de
+creator:
+  - givenName: OER
+    familyName: Tutorials
+    type: Person
+keywords:
+  - OER
+  - GitHub
+inLanguage:
+  - en
+learningResourceType:
+  - id: https://w3id.org/kim/hcrt/course
+educationalLevel:
+  - id: https://w3id.org/kim/educationalLevel/level_A
