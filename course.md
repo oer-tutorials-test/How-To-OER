@@ -16,3 +16,6 @@ Use our metadata form to easily create the metadata.yml file in the correct form
 
 ## Step 5: Generate your course
 Now, this is the tricky part: to create a good-looking course, you might need to create pages or a pipeline.
+
+## Step 6: Open the course markdown file in LiaScript
+To view the course as a "real", clickable course, open in [liascript](https://liascript.github.io)
