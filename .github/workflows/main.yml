@@ -35,6 +35,13 @@ jobs:
       - name: Execute script
         run: $PWD/pandoc_preparation.sh $FILENAME
 
+
+      - name: create file list after pandoc preparation
+        id: files_list_preparation
+        run: |
+          mkdir -p output
+          echo "files=$(printf '"%s" ' *.md)" > $GITHUB_OUTPUT
+
       - uses: docker://pandoc/latex:2.9
         with:
           args: --output=output/course.pdf $FILENAME-prepared.md
