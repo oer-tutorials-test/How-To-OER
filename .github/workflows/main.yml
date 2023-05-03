@@ -55,10 +55,13 @@ jobs:
             --output=output/course.pdf course.md
       - uses: docker://pandoc/latex:2.9
         with:
-          args: course.md -f markdown -t epub3 -s -o output/course.epub --metadata pagetitle="$CI_PROJECT_TITLE"
-            # title.txt $MARKDOWN_SOURCE_FILENAME-prepared.md -f markdown -t latex -s -o $MARKDOWN_SOURCE_FILENAME.pdf --metadata pagetitle="$CI_PROJECT_TITLE" --webtex
-            # title.txt $MARKDOWN_SOURCE_FILENAME-prepared.md -f markdown -t html -s -o index.html --metadata pagetitle="$CI_PROJECT_TITLE" --include-in-header=metadata.json --katex --css pandoc.css
-            # title.txt $MARKDOWN_SOURCE_FILENAME-prepared.md -f markdown -t asciidoc -s -o $MARKDOWN_SOURCE_FILENAME.asc --metadata pagetitle="$CI_PROJECT_TITLE" --webtex
+          args: -f markdown -t epub3 -s -o output/course.epub --metadata pagetitle="Course" course.md
+      - uses: docker://pandoc/latex:2.9
+        with:
+          args: |
+            #-f markdown -t latex -s -o output/course.pdf --metadata pagetitle="Course" course.md
+            -f markdown -t html -s -o output/index.html --metadata pagetitle="Course" --include-in-header=metadata.json --katex --css pandoc.css course.md
+            -f markdown -t asciidoc -s -o output/course.asc --metadata pagetitle="$CI_PROJECT_TITLE" course.md
 
           
       - uses: actions/upload-artifact@v3
@@ -73,6 +76,8 @@ jobs:
           git config --global user.email "sophie.matter@tib.eu"
           git add output/course.pdf
           git add output/course.epub
+          git add output/course.asc
+          git add output/index.html
           git add course-prepared.md
           git commit -m "Generate PDF"
           git push
