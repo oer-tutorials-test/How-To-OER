@@ -23,3 +23,12 @@ jobs:
         with:
           name: output
           path: output
+          
+      - name: Upload file to repository
+        run: |
+          git config --global user.name "oer-tutorials-test"
+          git config --global user.email "sophie.matter@tib.eu"
+          git add course.pdf
+          git commit -m "Add prepared course"
+          git push
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
