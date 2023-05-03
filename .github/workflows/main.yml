@@ -12,6 +12,7 @@ on:
       - main
 env:
   FILENAME: course
+  WORKDIR: $PWD/build
   
 jobs:          
   convert_via_pandoc:
