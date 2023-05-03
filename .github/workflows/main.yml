@@ -20,7 +20,7 @@ jobs:
       - name: create file list
         id: files_list
         run: |
-          mkdir output
+          mkdir -p output
           echo "files=$(printf '"%s" ' *.md)" > $GITHUB_OUTPUT
         
       # Runs a single command using the runners shell
