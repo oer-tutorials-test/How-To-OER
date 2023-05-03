@@ -29,7 +29,12 @@ jobs:
       - name: Check current directory
         run: pwd
       - name: Download the script
-        run: curl -o $PWD/pandoc_preparation.sh https://gitlab.com/TIBHannover/oer/course-pandoc-preparation/-/raw/master/pandoc-preparation.sh
+        run: |
+          curl -o $PWD/pandoc_preparation.sh https://gitlab.com/TIBHannover/oer/course-pandoc-preparation/-/raw/master/pandoc-preparation.sh
+          mkdir -p build
+          curl -o $PWD/build/default-pandoc.css https://gitlab.com/TIBHannover/oer/course-pandoc-preparation/-/raw/master/default-pandoc.css
+          curl -o $PWD/build/create-image-license-reference.py https://gitlab.com/TIBHannover/oer/course-pandoc-preparation/-/raw/master/create-image-license-reference.py
+          curl -o $PWD/build/create-lrmi-json-tag.py https://gitlab.com/TIBHannover/oer/course-pandoc-preparation/-/raw/master/create-lrmi-json-tag.py
       - name: Give script permissions
         run: chmod +x $PWD/pandoc_preparation.sh
       - name: Execute script
@@ -46,7 +51,13 @@ jobs:
 
       - uses: docker://pandoc/latex:2.9
         with:
-          args: --output=output/course.pdf ${{ steps.files_list_preparation.outputs.file }} 
+          args: |
+            --output=output/course.pdf ${{ steps.files_list_preparation.outputs.file }}
+            title.txt $MARKDOWN_SOURCE_FILENAME-prepared.md -f markdown -t epub3 -s -o $MARKDOWN_SOURCE_FILENAME.epub --metadata pagetitle="$CI_PROJECT_TITLE" --webtex
+            title.txt $MARKDOWN_SOURCE_FILENAME-prepared.md -f markdown -t latex -s -o $MARKDOWN_SOURCE_FILENAME.pdf --metadata pagetitle="$CI_PROJECT_TITLE" --webtex
+            title.txt $MARKDOWN_SOURCE_FILENAME-prepared.md -f markdown -t html -s -o index.html --metadata pagetitle="$CI_PROJECT_TITLE" --include-in-header=metadata.json --katex --css pandoc.css
+            title.txt $MARKDOWN_SOURCE_FILENAME-prepared.md -f markdown -t asciidoc -s -o $MARKDOWN_SOURCE_FILENAME.asc --metadata pagetitle="$CI_PROJECT_TITLE" --webtex
+
           
       - uses: actions/upload-artifact@v3
         with:
