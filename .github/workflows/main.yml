@@ -37,7 +37,7 @@ jobs:
 
       - uses: docker://pandoc/latex:2.9
         with:
-          args: --output=output/course.pdf ${{FILENAME}}-prepared.md
+          args: --output=output/course.pdf ${{$FILENAME}}-prepared.md
           
       - uses: actions/upload-artifact@v3
         with:
