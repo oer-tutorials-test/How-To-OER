@@ -53,7 +53,7 @@ jobs:
         with:
           args: |
             --output=output/course.pdf course.md
-      - uses: docker://pandoc/latex:2.9
+      - uses: docker://pandoc/core:2.9
         with:
           args: -f markdown -t epub3 -s -o output/course.epub --metadata title="Course" course.md
       - uses: docker://pandoc/core:2.9
