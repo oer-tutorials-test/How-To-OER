@@ -47,15 +47,15 @@ jobs:
           echo "files=$(printf '"%s" ' *.md)"
           echo "$FILENAME-prepared.md" > $GITHUB_OUTPUT
           echo "file=$($FILENAME-prepared.md)" > $GITHUB_OUTPUT
-
+          echo "${{ steps.files_list_preparation.outputs.file }}"
 
       - uses: docker://pandoc/latex:2.9
         with:
           args: |
-            --output=output/course.pdf ${{ steps.files_list_preparation.outputs.file }}
+            --output=output/course.pdf course.md
       - uses: docker://pandoc/latex:2.9
         with:
-          args:  ${{ steps.files_list_preparation.outputs.file }} -f markdown -t epub3 -s -o output/course.epub --metadata pagetitle="$CI_PROJECT_TITLE"
+          args: course.md -f markdown -t epub3 -s -o output/course.epub --metadata pagetitle="$CI_PROJECT_TITLE"
             # title.txt $MARKDOWN_SOURCE_FILENAME-prepared.md -f markdown -t latex -s -o $MARKDOWN_SOURCE_FILENAME.pdf --metadata pagetitle="$CI_PROJECT_TITLE" --webtex
             # title.txt $MARKDOWN_SOURCE_FILENAME-prepared.md -f markdown -t html -s -o index.html --metadata pagetitle="$CI_PROJECT_TITLE" --include-in-header=metadata.json --katex --css pandoc.css
             # title.txt $MARKDOWN_SOURCE_FILENAME-prepared.md -f markdown -t asciidoc -s -o $MARKDOWN_SOURCE_FILENAME.asc --metadata pagetitle="$CI_PROJECT_TITLE" --webtex
