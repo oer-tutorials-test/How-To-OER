@@ -58,9 +58,10 @@ jobs:
           args: -f markdown -t epub3 -s -o output/course.epub --metadata title="Course" course.md
       - uses: docker://pandoc/core:2.9
         with:
-          args: |
-            -t html -s -o output/index.html --metadata pagetitle="Course" --katex --css pandoc.css course.md
-            -t asciidoc -s -o output/course.asc --metadata pagetitle="TITLE" course.md
+          args: -t html -s -o output/index.html --metadata pagetitle="Course" --katex --css pandoc.css course.md
+      - uses: docker://pandoc/core:2.9
+        with:
+          args: -t asciidoc -s -o output/course.asc --metadata pagetitle="TITLE" course.md
 
           
       - uses: actions/upload-artifact@v3
