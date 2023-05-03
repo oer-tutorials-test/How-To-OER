@@ -42,12 +42,12 @@ jobs:
           echo "files=$(printf '"%s" ' *.md)"
           echo "$env.FILENAME"
           echo "$FILENAME"
-          echo  "$env.FILENAME-prepared.md"
+          echo  "${{FILENAME}}-prepared.md"
           echo "$FILENAME-prepared.md"
 
       - uses: docker://pandoc/latex:2.9
         with:
-          args: --output=output/course.pdf "$FILENAME-prepared.md"
+          args: --output=output/course.pdf course-prepared.md
           
       - uses: actions/upload-artifact@v3
         with:
