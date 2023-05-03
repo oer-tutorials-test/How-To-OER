@@ -13,14 +13,6 @@ on:
 
 jobs:
 
-  pandoc_preparation:
-    runs-on: ubuntu-22.04
-    steps:
-      - uses: docker://pandoc/latex:2.9
-      - name: Prepare the course
-        with:
-          args: --output=output/course.pdf
-
   convert_via_pandoc:
     runs-on: ubuntu-22.04
     steps:
