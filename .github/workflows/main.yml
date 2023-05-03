@@ -39,7 +39,7 @@ jobs:
       - name: create file list after pandoc preparation
         id: files_list_preparation
         run: |
-          echo "files=$(printf '"%s" ' *.md)" > $GITHUB_OUTPUT
+          echo "files=$(printf '"%s" ' *.md)"
 
       - uses: docker://pandoc/latex:2.9
         with:
