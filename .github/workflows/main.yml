@@ -60,6 +60,7 @@ jobs:
         with:
           args: |
             -t html -s -o output/index.html --metadata pagetitle="Course" --katex --css pandoc.css course.md
+            -t asciidoc -s -o output/course.asc --metadata pagetitle="TITLE" course.md
 
           
       - uses: actions/upload-artifact@v3
