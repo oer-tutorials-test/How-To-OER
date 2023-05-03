@@ -61,7 +61,6 @@ jobs:
           args: |
             #-t latex -s -o output/course.pdf --metadata pagetitle="Course" course.md
             -t html -s -o output/index.html --metadata pagetitle="Course" --katex --css pandoc.css course.md
-            #-t asciidoc -s -o output/course.asc --metadata pagetitle="$CI_PROJECT_TITLE" course.md
 
           
       - uses: actions/upload-artifact@v3
