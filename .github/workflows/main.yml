@@ -11,16 +11,7 @@ on:
     branches:
       - main
 
-jobs:
-  pandoc_preparation:
-    runs-on: ubuntu-22.04
-    steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v3
-
-      
-
-          
+jobs:          
   convert_via_pandoc:
     runs-on: ubuntu-22.04
     steps:
