@@ -55,13 +55,13 @@ jobs:
             --output=output/course.pdf course.md
       - uses: docker://pandoc/latex:2.9
         with:
-          args: -f markdown -t epub3 -s -o output/course.epub --metadata pagetitle="Course" course.md
+          args: -f markdown -t epub3 -s -o output/course.epub --metadata title="Course" course.md
       - uses: docker://pandoc/latex:2.9
         with:
           args: |
             #-t latex -s -o output/course.pdf --metadata pagetitle="Course" course.md
             -t html -s -o output/index.html --metadata pagetitle="Course" --katex --css pandoc.css course.md
-            -t asciidoc -s -o output/course.asc --metadata pagetitle="$CI_PROJECT_TITLE" course.md
+            #-t asciidoc -s -o output/course.asc --metadata pagetitle="$CI_PROJECT_TITLE" course.md
 
           
       - uses: actions/upload-artifact@v3
