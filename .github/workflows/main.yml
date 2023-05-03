@@ -40,11 +40,11 @@ jobs:
         id: files_list_preparation
         run: |
           echo "files=$(printf '"%s" ' *.md)"
-          echo "$FILENAME-prepared.md"
+          echo "$FILENAME-prepared.md" > $GITHUB_OUTPUT
 
       - uses: docker://pandoc/latex:2.9
         with:
-          args: --output=output/course.pdf course-prepared.md
+          args: --output=output/course.pdf ${{ steps.files_list_preparation.outputs }} 
           
       - uses: actions/upload-artifact@v3
         with:
