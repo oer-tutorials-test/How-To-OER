@@ -33,11 +33,11 @@ jobs:
       - name: Give script permissions
         run: chmod +x $PWD/pandoc_preparation.sh
       - name: Execute script
-        run: $PWD/pandoc_preparation.sh $FILENAME
+        run: $PWD/pandoc_preparation.sh $env.FILENAME
 
       - uses: docker://pandoc/latex:2.9
         with:
-          args: --output=output/course.pdf ${{$FILENAME}}-prepared.md
+          args: --output=output/course.pdf ${{env.FILENAME}}-prepared.md
           
       - uses: actions/upload-artifact@v3
         with:
