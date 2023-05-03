@@ -12,7 +12,15 @@ on:
       - main
 
 jobs:
+  pandoc_preparation:
+    runs-on: ubuntu-22.04
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v3
 
+      
+
+          
   convert_via_pandoc:
     runs-on: ubuntu-22.04
     steps:
@@ -23,6 +31,16 @@ jobs:
         run: |
           mkdir output
           echo "files=$(printf '"%s" ' *.md)" > $GITHUB_OUTPUT
+        
+      # Runs a single command using the runners shell
+      - name: Check current directory
+        run: pwd
+      - name: Download the script
+        run: curl -o $PWD/pandoc_preparation.sh https://gitlab.com/TIBHannover/oer/course-pandoc-preparation/-/raw/master/pandoc-preparation.sh
+      - name: Give script permissions
+        run: chmod +x $PWD/pandoc_preparation.sh
+      - name: Execute script
+        run: $PWD/pandoc_preparation.sh ${{ steps.files_list.outputs.files }} 
 
       - uses: docker://pandoc/latex:2.9
         with:
