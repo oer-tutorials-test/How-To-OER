@@ -40,9 +40,6 @@ jobs:
         id: files_list_preparation
         run: |
           echo "files=$(printf '"%s" ' *.md)"
-          echo "$env.FILENAME"
-          echo "$FILENAME"
-          echo  "${{FILENAME}}-prepared.md"
           echo "$FILENAME-prepared.md"
 
       - uses: docker://pandoc/latex:2.9
